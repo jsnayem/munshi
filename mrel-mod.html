@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Properties - Luxury Real Estate</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        /* Card Container Styles */
+        .card-container {
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+        }
+
+        .card-content{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            flex-direction: column;
+            overflow-y: scroll;
+            width: 100%;
+        }
+
+        .card {
+            min-height: 100vh;
+            width: 100%;
+            padding: 2rem;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Individual Card Styles */
+        .card-1 {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        .card-2 {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .card-3 {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .card-4 {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        /* Card 1 - Logo & Navigation */
+        .logo-container {
+            width: 200px;
+            height: 200px;
+            background-color: white;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            width: 80%;
+            height: auto;
+        }
+
+        .welcome-text {
+            max-width: 600px;
+            text-align: center;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .nav-link {
+            padding: 0.8rem 1.5rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
+        /* Card 2 - Projects */
+        .projects-header {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .projects-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 2rem;
+            padding: 1rem;
+            scroll-snap-type: x mandatory;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .project-card {
+            min-width: 300px;
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            scroll-snap-align: center;
+            color: #333;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            background-color: #3498db;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        /* Card 3 - Staff */
+        .staff-header {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .staff-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .staff-member {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .staff-member:hover {
+            transform: translateY(-10px);
+        }
+
+        .staff-name {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .staff-position {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .staff-image-container {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 1.5rem;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .staff-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .staff-member:hover .staff-image {
+            transform: scale(1.05);
+        }
+
+        /* Card 4 - Contact */
+        .contact-header {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .company-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .info-icon {
+            font-size: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .logo-container {
+                width: 150px;
+                height: 150px;
+            }
+
+            .welcome-text {
+                padding: 0 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .staff-list {
+                grid-template-columns: 1fr;
+            }
+                .staff-image-container {
+                width: 120px;
+                height: 120px;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="card-container">
+        <!-- Card 1 - Logo & Navigation -->
+        <section class="card card-1">
+            <div class="card-content">
+                <div class="logo-container">
+                    <img src="logo.png" alt="Prime Properties Logo" class="logo">
+                </div>
+                <p class="welcome-text">
+                    Welcome to Munshi Real Estate, your premier destination for real estate needs. 
+                    With over 20 years of experience, we specialize in high-end residential and 
+                    commercial properties across Dhaka.
+                </p>
+                <div class="nav-links">
+                    <a href="#projects" class="nav-link">Our Projects</a>
+                    <a href="#team" class="nav-link">Our Team</a>
+                    <a href="#contact" class="nav-link">Contact Us</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Card 2 - Projects -->
+        <section class="card card-2" id="projects">
+            <div class="card-content">
+                <h2 class="projects-header">Featured Projects</h2>
+                <div class="projects-container">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Luxury Villa" class="project-image">
+                        <div class="project-info">
+                            <h3 class="project-title">Oceanview Villas</h3>
+                            <p>Luxury beachfront properties with panoramic ocean views and premium amenities.</p>
+                            <div class="project-tags">
+                                <span class="tag">Residential</span>
+                                <span class="tag">Luxury</span>
+                                <span class="tag">Beachfront</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Commercial Building" class="project-image">
+                        <div class="project-info">
+                            <h3 class="project-title">Downtown Tower</h3>
+                            <p>State-of-the-art commercial space in the heart of the financial district.</p>
+                            <div class="project-tags">
+                                <span class="tag">Commercial</span>
+                                <span class="tag">Office</span>
+                                <span class="tag">Downtown</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Country Estate" class="project-image">
+                        <div class="project-info">
+                            <h3 class="project-title">Greenfield Estates</h3>
+                            <p>Exclusive countryside estates with expansive land and custom architecture.</p>
+                            <div class="project-tags">
+                                <span class="tag">Residential</span>
+                                <span class="tag">Estate</span>
+                                <span class="tag">Custom</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Card 3 - Staff -->
+        <section class="card card-3" id="team">
+            <div class="card-content">
+                <h2 class="staff-header">Our Team</h2>
+                <div class="staff-list">
+                    <div class="staff-member">
+                        <div class="staff-image-container">
+                            <img src="photo.png" alt="Sarah Johnson" class="staff-image">
+                        </div>
+                        <h3 class="staff-name">Monir Munshi</h3>
+                        <p class="staff-position">CEO & Founder</p>
+                        <p>20+ years in luxury real estate development</p>
+                    </div>
+                    <div class="staff-member">
+                        <div class="staff-image-container">
+                            <img src="photo.png" alt="Michael Chen" class="staff-image">
+                        </div>
+                        <h3 class="staff-name">Mannan Munshi</h3>
+                        <p class="staff-position">Head of Corporate Affairs</p>
+                        <p>Specializes in paper works & corporate relations</p>
+                    </div>
+                    <div class="staff-member">
+                        <div class="staff-image-container">
+                            <img src="photo.png" alt="Emily Rodriguez" class="staff-image">
+                        </div>
+                        <h3 class="staff-name">Khan Nazrul Islam</h3>
+                        <p class="staff-position">Head of Accounts</p>
+                        <p>Expertise in business Analytics</p>
+                    </div>
+                    <div class="staff-member">
+                        <div class="staff-image-container">
+                            <img src="photo.png" alt="David Wilson" class="staff-image">
+                        </div>
+                        <h3 class="staff-name">Kawsar Hossain Shohag</h3>
+                        <p class="staff-position">Field operations</p>
+                        <p>Oversees our portfolio of real estate properties</p>
+                    </div>
+                    <div class="staff-member">
+                        <div class="staff-image-container">
+                            <img src="photo.png" alt="David Wilson" class="staff-image">
+                        </div>
+                        <h3 class="staff-name">Md Nayem</h3>
+                        <p class="staff-position">Software Developer</p>
+                        <p></p>
+                    </div>
+                    <div class="staff-member">
+                        <div class="staff-image-container">
+                            <img src="photo.png" alt="David Wilson" class="staff-image">
+                        </div>
+                        <h3 class="staff-name">Sheikh Abir Mahamud</h3>
+                        <p class="staff-position">Computer Operator</p>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Card 4 - Contact -->
+        <section class="card card-4" id="contact">
+            <div class="card-content">
+                <h2 class="contact-header">Contact Us</h2>
+                <div class="contact-content">
+                    <div class="company-info">
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt info-icon"></i>
+                            <p>228/7 North Manda Mugda, Dhaka 1214</p>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-phone info-icon"></i>
+                            <p>+1 (555) 123-4567</p>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-envelope info-icon"></i>
+                            <p>info@munshirealeastate.com</p>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-clock info-icon"></i>
+                            <p>Mon-Fri: 9AM - 6PM<br>Sat: 10AM - 4PM</p>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                    <div class="company-info">
+                        <h3>About Munshi Real Estate</h3>
+                        <p>Founded in 2001, Prime Properties has established itself as a leader in local real estate market. We pride ourselves on our personalized service, attention to detail, and unparalleled market knowledge.</p>
+                        <p>Our portfolio includes over 500 high-end properties across Dhaka, with a total transaction value exceeding 2 billion Taka.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
